@@ -36,10 +36,10 @@ public class DiaryBotConfig {
     @Value("${telegrambot.botToken}")
     String botToken;
 
-//    final String botPath = "";
+    final String botPath = "diary";
 
-//    @Value("${telegrambot.integral-url}")
-//    String integralUrl;
+    @Value("${telegrambot.integral-url}")
+    String integralUrl;
 
     /**
      * That factory method create SetWebhook object with updating url for webhook address.
@@ -59,12 +59,12 @@ public class DiaryBotConfig {
     @Bean
     public DiaryBot diaryBot(SetWebhook setWebhookInstance) throws TelegramApiException {
         DiaryBot diaryBot = new DiaryBot(setWebhookInstance);
-//        diaryBot.setBotPath(botPath);
+        diaryBot.setBotPath(botPath);
         diaryBot.setBotToken(botToken);
         diaryBot.setBotUsername(userName);
         DefaultWebhook defaultWebhook = new DefaultWebhook();
 
-        defaultWebhook.setInternalUrl("http://localhost");
+        defaultWebhook.setInternalUrl(integralUrl);
 
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class, defaultWebhook);
         telegramBotsApi.registerBot(diaryBot, setWebhookInstance);
